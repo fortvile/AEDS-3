@@ -1,3 +1,9 @@
+/*
+
+Aluno: Rafael Pereira Vilefort
+
+*/
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,16 +15,17 @@ import java.util.ArrayList;
 public class FileHandler {
 
     public static void deleteFiles() {
-        File[] file = new File[9];
+        File[] file = new File[10];
         file[0] = new File("data/jogo.data");
         file[1] = new File("data/jogocestos.data");
         file[2] = new File("data/jogoId.data");
         file[3] = new File("data/jogoIi.data");
-        file[4] = new File("tmp/arq1.bin");
-        file[5] = new File("tmp/arq2.bin");
-        file[6] = new File("tmp/arq3.bin");
-        file[7] = new File("tmp/arq4.bin");
-        file[8] = new File("tmp/arqFinal.bin");
+        file[4] = new File("data/jogoIr.data");
+        file[5] = new File("tmp/arq1.bin");
+        file[6] = new File("tmp/arq2.bin");
+        file[7] = new File("tmp/arq3.bin");
+        file[8] = new File("tmp/arq4.bin");
+        file[9] = new File("tmp/arqFinal.bin");
         for (int i = 0; i < 9; i++) {
             if (file[i].exists()) {
                 file[i].delete();
@@ -62,6 +69,7 @@ public class FileHandler {
             for (int j = 0; j < jogo.size(); j++) {
 
                 crud.create(jogo.get(j));
+                
 
             }
         } catch (Exception e) {

@@ -1,5 +1,7 @@
 /*Classe Main para a realizacao de testes*/
 
+import java.util.ArrayList;
+
 public class Main {
   
   public static void main(String[] args) throws NoSuchMethodException{
@@ -10,13 +12,12 @@ public class Main {
     CRUD<Jogo> Library = new CRUD<>(Jogo.class.getConstructor(),"jogo");
 
     try{
-      FileHandler.criarBD(Library);
+    FileHandler.criarBD(Library);
     }catch(Exception e){
       System.err.println("Falha ao criar o BD");
     }
 
     /*Testando o "Create"*/
-    //Jogo teste1 = new Jogo(1200, "Vilefort", "2000-11-0", "aaaa");
     //Criando o objeto "meuLivro" e armazenando ele no CRUD
     Jogo teste1 = new Jogo(1200, "Vilefort", "2000-11-0", "aaaa");
     Library.create(teste1);
@@ -101,11 +102,25 @@ public class Main {
     System.out.println("\nSe voce chegou aqui, entao parabens :D !");
 
 
-    try{
+    ArrayList<Jogo> jogo = Library.readRevertedIndex("Death");
+    if(jogo != null){
+      for(int i = 0; i < jogo.size(); i++){
+        if(jogo.get(i) != null){
+          System.out.println(jogo.get(i).toString());
+        }
+        else{
+          System.out.println("Nao foi possivel encontrar o jogo");
+        }
+      }
+    } else { 
+      System.out.println("Nao ha correspondencia de indices e strings");
+    }
+    
+    /*try{
     Ordenacao.intercalar();
     }catch(Exception e){
       System.err.println("Falha ao intercalar");
-    }
+    }*/
   }
 
   

@@ -1,15 +1,13 @@
 /*
-CRUD criado para a disciplina de AED III
 
-Aluno: Gustavo Lopes Rodrigues
-Matricula: 655264
-Versao: 0.0.2
+Aluno: Rafael Pereira Vilefort
 
 */
 
 //Bibliotecas importadasport Register.java;
 import java.io.*;
 import java.lang.reflect.*;
+import java.util.ArrayList;
 
 public class CRUD<T extends Register> {
 
@@ -20,6 +18,7 @@ public class CRUD<T extends Register> {
   //Indices Direto e Indireto armazenado em uma Hash e ArvoreB+
   private HashExtensivel ld;      
   private ArvoreBMais_String_Int li;
+  private ListaInvertida lr;
 
   //Construtor
   public CRUD(Constructor<T> constructor,String filepath) {
@@ -58,6 +57,9 @@ public class CRUD<T extends Register> {
                                "data/" + filepath + "cestos" + ".data");
 
       li = new ArvoreBMais_String_Int(10,"data/" + filepath + "Ii" + ".data");
+
+      lr = new ListaInvertida("data/" + filepath + "Ir" + ".data");
+
     }
     catch(Exception e) {
 
@@ -96,6 +98,7 @@ public class CRUD<T extends Register> {
 
       ld.create(id,pos+1);
       li.create(object.chaveSecundaria(),id);
+      lr.inserir((Jogo)object);
 
       //arquive.writeChar(' ');               //Esse espaco vazio eh a lapide
       arquive.writeByte(0);
@@ -194,6 +197,33 @@ public class CRUD<T extends Register> {
     return object;
   }
 
+  //Lendo um objeto a partir do indice invertido
+  
+  
+   public ArrayList<Jogo> readRevertedIndex(String chave){
+      
+      ArrayList<Jogo> jogos = new ArrayList<Jogo>();
+      ArrayList<Integer> ids = lr.buscar(chave);
+    
+      
+      /*for(int j = 0; j < ids.size(); j++){
+        System.out.println(ids.get(j));
+      }*/
+
+      if (ids != null) {
+        for(int i = 0; i < ids.size(); i++){
+          jogos.add(read(ids.get(i)));
+        }
+      } else {
+        return null;
+      }
+       
+
+  
+      return jogos;
+   }
+   
+
   //Atualiza um registro 
   /*
   Primeiro ele verifica se o objeto que o 
@@ -283,6 +313,7 @@ public class CRUD<T extends Register> {
 
       ld.delete(id);
       li.delete(auxObject.chaveSecundaria());
+      lr.remover((Jogo)auxObject);
 
       arquive.seek(pos+1);
       //System.out.println("posDelete " + pos);
