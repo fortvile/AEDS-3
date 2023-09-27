@@ -14,8 +14,12 @@ import java.util.ArrayList;
 
 public class FileHandler {
 
+    public FileHandler(){
+        
+    }
+
     public static void deleteFiles() {
-        File[] file = new File[10];
+        File[] file = new File[14];
         file[0] = new File("data/jogo.data");
         file[1] = new File("data/jogocestos.data");
         file[2] = new File("data/jogoId.data");
@@ -26,11 +30,16 @@ public class FileHandler {
         file[7] = new File("tmp/arq3.bin");
         file[8] = new File("tmp/arq4.bin");
         file[9] = new File("tmp/arqFinal.bin");
-        for (int i = 0; i < 9; i++) {
+        file[10] = new File("data/sortdb.data");
+        file[11] = new File("data/sortdbcestos.data");
+        file[12] = new File("data/sortdbld.data");
+        file[13] = new File("data/sortdbil.data");
+        for (int i = 0; i < 14; i++) {
             if (file[i].exists()) {
                 file[i].delete();
             }
         }
+        
     }
 
     public static ArrayList<Jogo> lerCSV() throws InterruptedException {

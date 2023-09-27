@@ -14,6 +14,16 @@ import java.util.Random;
 public class Ordenacao {
 
     public static int last_id;
+    public static CRUD<Jogo> Library;
+
+    public Ordenacao() {
+
+        try {
+            Library = new CRUD<>(Jogo.class.getConstructor(), "sortdb");
+        } catch (NoSuchMethodException e) {
+            System.err.println("Falha ao criar database ordenado");
+        }
+    }
     
     public static Jogo[] ordenar(Jogo[] ordenados) {
         int menor = 0;
@@ -37,7 +47,7 @@ public class Ordenacao {
     }
     
 
-    public static boolean intercalar() throws IOException {
+    public static CRUD<Jogo> intercalar() throws IOException {
 
         
         RandomAccessFile raf = new RandomAccessFile("data/jogo.data", "rw");
@@ -297,6 +307,7 @@ public class Ordenacao {
             ba = new byte[tam];
             arq1.read(ba);
             jogo.fromByteArray(ba); // Lê o registro
+                Library.create(jogo); // Adiciona o registro no arquivo final
             arqFinal.writeByte(0); // Escreve o byte de lapide
             arqFinal.writeInt(jogo.toByteArray().length); // Escreve o tamanho do registro
             arqFinal.write(jogo.toByteArray()); // Escreve o registro
@@ -309,7 +320,7 @@ public class Ordenacao {
         arq4.close();
         arqFinal.close();
 
-        return true;
+        return Library;
     }
 
 }

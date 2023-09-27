@@ -6,6 +6,7 @@ public class Main {
   
   public static void main(String[] args) throws NoSuchMethodException{
 
+
     FileHandler.deleteFiles();
 
     //Criando o CRUD do tipo 'Jogo'
@@ -99,7 +100,7 @@ public class Main {
     }
 
     //Mensagem para ser imprimida caso tudo dê certo
-    System.out.println("\nSe voce chegou aqui, entao parabens :D !");
+    System.out.println("\nSe voce chegou aaaaaaaqui, entao parabens :D !");
 
 
     ArrayList<Jogo> jogo = Library.readRevertedIndex("Death");
@@ -116,11 +117,15 @@ public class Main {
       System.out.println("Nao ha correspondencia de indices e strings");
     }
     
-    /*try{
-    Ordenacao.intercalar();
+    try{
+      Ordenacao o = new Ordenacao();
+      Library = o.intercalar();
     }catch(Exception e){
       System.err.println("Falha ao intercalar");
-    }*/
+    }
+
+    Jogo teste7 = Library.read(0);
+    System.out.println(teste7.toString());
   }
 
   
