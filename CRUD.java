@@ -19,6 +19,7 @@ public class CRUD<T extends Register> {
   private HashExtensivel ld;      
   private ArvoreBMais_String_Int li;
   private ListaInvertida lr;
+  private ListaInvertida2 lr2;
 
   //Construtor
   public CRUD(Constructor<T> constructor,String filepath) {
@@ -60,6 +61,8 @@ public class CRUD<T extends Register> {
 
       lr = new ListaInvertida("data/" + filepath + "Ir" + ".data");
 
+      lr2 = new ListaInvertida2("data/" + filepath + "Ir2" + ".data");
+
     }
     catch(Exception e) {
 
@@ -99,6 +102,7 @@ public class CRUD<T extends Register> {
       ld.create(id,pos+1);
       li.create(object.chaveSecundaria(),id);
       lr.inserir((Jogo)object);
+      lr2.inserir((Jogo)object);
 
       //arquive.writeChar(' ');               //Esse espaco vazio eh a lapide
       arquive.writeByte(0);
@@ -314,6 +318,7 @@ public class CRUD<T extends Register> {
       ld.delete(id);
       li.delete(auxObject.chaveSecundaria());
       lr.remover((Jogo)auxObject);
+      lr2.remover((Jogo)auxObject);
 
       arquive.seek(pos+1);
       //System.out.println("posDelete " + pos);

@@ -19,7 +19,7 @@ public class FileHandler {
     }
 
     public static void deleteFiles() {
-        File[] file = new File[14];
+        File[] file = new File[15];
         file[0] = new File("data/jogo.data");
         file[1] = new File("data/jogocestos.data");
         file[2] = new File("data/jogoId.data");
@@ -32,14 +32,29 @@ public class FileHandler {
         file[9] = new File("tmp/arqFinal.bin");
         file[10] = new File("data/sortdb.data");
         file[11] = new File("data/sortdbcestos.data");
-        file[12] = new File("data/sortdbld.data");
-        file[13] = new File("data/sortdbil.data");
-        for (int i = 0; i < 14; i++) {
+        file[12] = new File("data/sortdbId.data");
+        file[13] = new File("data/sortdbIi.data");
+        file[14] = new File("data/sortdbIr.data");
+        for (int i = 0; i < 15; i++) {
             if (file[i].exists()) {
                 file[i].delete();
             }
         }
         
+    }
+
+    public static void deleteSortedFiles(){
+        File[] file = new File[5];
+        file[0] = new File("data/sortdb.data");
+        file[1] = new File("data/sortdbcestos.data");
+        file[2] = new File("data/sortdbId.data");
+        file[3] = new File("data/sortdbIi.data");
+        file[4] = new File("data/sortdbIr.data");
+        for(int i = 0; i < 5; i++) {
+            if(file[i].exists()) {
+                file[i].delete();
+            }
+        }
     }
 
     public static ArrayList<Jogo> lerCSV() throws InterruptedException {

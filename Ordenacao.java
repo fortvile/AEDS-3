@@ -15,9 +15,11 @@ public class Ordenacao {
 
     public static int last_id;
     public static CRUD<Jogo> Library;
+    private static ArrayList<Long> indices_lapide;
 
     public Ordenacao() {
-
+        FileHandler.deleteSortedFiles();
+        indices_lapide = new ArrayList<Long>();
         try {
             Library = new CRUD<>(Jogo.class.getConstructor(), "sortdb");
         } catch (NoSuchMethodException e) {
@@ -72,7 +74,8 @@ public class Ordenacao {
 
         raf.seek(4); // Posiciona o ponteiro no inicio do arquivo
         while (raf.getFilePointer() < raf.length()) { // Enquanto o ponteiro nao chegar no final do arquivo
-            if (raf.readByte() == 0) {
+            /*if (raf.readByte() == 0) {
+                //raf.skipBytes(1);
                 jogo = null;
                 jogo = new Jogo();
                 tam = raf.readInt();
@@ -82,6 +85,29 @@ public class Ordenacao {
                 jogos.add(jogo);
             } else {
                 raf.skipBytes(raf.readInt());
+            }*/
+            if (raf.readByte() == 0) {
+                //Se não for lápide, adiciona-se o jogo na arraylist normalmente
+                //raf.skipBytes(1);
+                jogo = null;
+                jogo = new Jogo();
+                tam = raf.readInt();
+                ba = new byte[tam];
+                raf.read(ba);
+                jogo.fromByteArray(ba);
+                jogos.add(jogo);
+            } else {
+                //Se for lápide, adiciona o índice no array de índices de lápide
+                //Isso vai ser útil para marcar as lápides do arquivo ordenado
+                    long pos = raf.getFilePointer() - 1;
+                    indices_lapide.add(pos);
+                jogo = null;
+                jogo = new Jogo();
+                tam = raf.readInt();
+                ba = new byte[tam];
+                raf.read(ba);
+                jogo.fromByteArray(ba);
+                jogos.add(jogo);
             }
         }
 
@@ -129,7 +155,7 @@ public class Ordenacao {
         ArrayList<Jogo> jogos1 = new ArrayList<Jogo>();
         ArrayList<Jogo> jogos2 = new ArrayList<Jogo>();
 
-        System.out.println("\n-> Intercalação 1 ...");
+        System.out.println("\n-> Intercalacao 1 ...");
 
         arq1.seek(0); // Posiciona o ponteiro no inicio do arquivo 1
 
@@ -212,7 +238,7 @@ public class Ordenacao {
         int qdt = 2; // Numero inicial da intercalação
         while (arq2.length() > 0) { // Enquanto o arquivo 2 nao estiver vazio
 
-            System.out.println("\n-> Intercalação " + qdt + " ..."); // Imprime o numero da intercalação
+            System.out.println("\n-> Intercalacao " + qdt + " ..."); // Imprime o numero da intercalação
             arq3.seek(0);
             while (arq3.getFilePointer() < arq3.length()) { // Enquanto o ponteiro nao chegar no final do arquivo 3 le o
                                                             // registro e adiciona no array jogos1
@@ -312,6 +338,14 @@ public class Ordenacao {
             arqFinal.writeInt(jogo.toByteArray().length); // Escreve o tamanho do registro
             arqFinal.write(jogo.toByteArray()); // Escreve o registro
         }
+
+        
+        for(int i = 0; i < indices_lapide.size(); i++) { // Percorre o array de indices de lapide
+            arqFinal.seek(indices_lapide.get(i)); // Posiciona o ponteiro no indice de lapide
+            arqFinal.writeByte(1); //   Escreve o byte de lapide
+        }
+
+
 
         // Fecha os arquivos
         arq1.close(); 

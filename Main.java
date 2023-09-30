@@ -126,6 +126,14 @@ public class Main {
 
     Jogo teste7 = Library.read(0);
     System.out.println(teste7.toString());
+
+    Jogo teste8 = Library.read(26193);
+    System.out.println(teste8.toString());
+
+    Library.delete(26193);
+
+    Jogo teste9 = Library.read(8);
+    System.out.println(teste9.toString());
   }
 
   
