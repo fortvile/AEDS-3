@@ -1,6 +1,9 @@
 /*
 
+Professor: Hayala Curto Nepomuceno
+Aluno: Raul Cruz
 Aluno: Rafael Pereira Vilefort
+
 
 */
 
@@ -79,6 +82,20 @@ public class Jogo implements Register{
     public void setData(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    public void setData(String releaseDate){
+        DateFormat ft = new SimpleDateFormat("yyyy-dd-MM");
+        try {
+            this.releaseDate = ft.parse(releaseDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPlatforms(String platforms){
+        this.platforms = RetornaLista(platforms);
+    }
+
     public Vector<String> getPlatforms() {
         return this.platforms;
     }

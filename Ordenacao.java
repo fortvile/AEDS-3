@@ -1,6 +1,9 @@
 /*
 
+Professor: Hayala Curto Nepomuceno
+Aluno: Raul Cruz
 Aluno: Rafael Pereira Vilefort
+
 
 */
 
@@ -18,9 +21,14 @@ public class Ordenacao {
     private static ArrayList<Long> indices_lapide;
 
     public Ordenacao() {
+        //Limpa os arquivos ordenados antes de fazer uma nova ordenação
+        //Serve para evitar que os arquivos ordenados fiquem com registros duplicados
+        //e para limpar os arquivos da execução anterior do programa
         FileHandler.deleteSortedFiles();
+        //Vetor que marca os ids de jogos que foram excluidos
         indices_lapide = new ArrayList<Long>();
         try {
+            //Cria uma nova instância de Library para armazenar os jogos ordenados
             Library = new CRUD<>(Jogo.class.getConstructor(), "sortdb");
         } catch (NoSuchMethodException e) {
             System.err.println("Falha ao criar database ordenado");
@@ -238,7 +246,7 @@ public class Ordenacao {
         int qdt = 2; // Numero inicial da intercalação
         while (arq2.length() > 0) { // Enquanto o arquivo 2 nao estiver vazio
 
-            System.out.println("\n-> Intercalacao " + qdt + " ..."); // Imprime o numero da intercalação
+            System.out.println("\n-*-Intercalacao " + qdt + " -*-"); // Imprime o numero da intercalação
             arq3.seek(0);
             while (arq3.getFilePointer() < arq3.length()) { // Enquanto o ponteiro nao chegar no final do arquivo 3 le o
                                                             // registro e adiciona no array jogos1

@@ -1,6 +1,9 @@
 /*
 
+Professor: Hayala Curto Nepomuceno
+Aluno: Raul Cruz
 Aluno: Rafael Pereira Vilefort
+
 
 */
 
@@ -12,14 +15,18 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+//Classe destinada à manipulação de arquivos
+
 public class FileHandler {
 
     public FileHandler(){
         
     }
 
+    //Deleta uma série de arquivos
+
     public static void deleteFiles() {
-        File[] file = new File[15];
+        File[] file = new File[16];
         file[0] = new File("data/jogo.data");
         file[1] = new File("data/jogocestos.data");
         file[2] = new File("data/jogoId.data");
@@ -35,13 +42,16 @@ public class FileHandler {
         file[12] = new File("data/sortdbId.data");
         file[13] = new File("data/sortdbIi.data");
         file[14] = new File("data/sortdbIr.data");
-        for (int i = 0; i < 15; i++) {
+        file[15] = new File("data/sortdbIr2.data");
+        for (int i = 0; i < 16; i++) {
             if (file[i].exists()) {
                 file[i].delete();
             }
         }
         
     }
+
+    //Deleta arquivos ordenados
 
     public static void deleteSortedFiles(){
         File[] file = new File[5];
@@ -56,6 +66,8 @@ public class FileHandler {
             }
         }
     }
+
+    //Lê o arquivo CSV e retorna um ArrayList de jogos
 
     public static ArrayList<Jogo> lerCSV() throws InterruptedException {
         String linha[] = new String[27075];
@@ -83,6 +95,8 @@ public class FileHandler {
         return jogo;
     }
 
+    //Popula o banco de dados com os jogos extraidos do CSV
+    
     public static void criarBD(CRUD<Jogo> crud) throws Exception {
 
         ArrayList<Jogo> jogo = lerCSV();

@@ -1,3 +1,12 @@
+/*
+
+Professor: Hayala Curto Nepomuceno
+Aluno: Raul Cruz
+Aluno: Rafael Pereira Vilefort
+
+
+*/
+
 import java.io.IOException;  
 
 /*

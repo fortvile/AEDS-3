@@ -1,6 +1,9 @@
 /*
 
+Professor: Hayala Curto Nepomuceno
+Aluno: Raul Cruz
 Aluno: Rafael Pereira Vilefort
+
 
 */
 
@@ -50,14 +53,14 @@ public class CRUD<T extends Register> {
       //Se o arquivo estiver vazio
       if (arquive.length() <= 0) {
 
-        arquive.writeInt(0);
+        arquive.writeInt(0); //Lápide
       }
 
       //Criar os Indice Direto e Indireto
       ld = new HashExtensivel(10,"data/" + filepath + "Id" + ".data",
                                "data/" + filepath + "cestos" + ".data");
 
-      li = new ArvoreBMais_String_Int(10,"data/" + filepath + "Ii" + ".data");
+      li = new ArvoreBMais_String_Int(8,"data/" + filepath + "Ii" + ".data");
 
       lr = new ListaInvertida("data/" + filepath + "Ir" + ".data");
 
@@ -104,7 +107,7 @@ public class CRUD<T extends Register> {
       lr.inserir((Jogo)object);
       lr2.inserir((Jogo)object);
 
-      //arquive.writeChar(' ');               //Esse espaco vazio eh a lapide
+      //arquive.writeChar(0);               //Esse espaco vazio e a lapide
       arquive.writeByte(0);
       arquive.writeInt(objectData.length);
       arquive.write(objectData);
@@ -227,6 +230,26 @@ public class CRUD<T extends Register> {
       return jogos;
    }
    
+   public ArrayList<Jogo> readRevertedIndex_2(String chave){
+        
+        ArrayList<Jogo> jogos = new ArrayList<Jogo>();
+        ArrayList<Integer> ids = lr2.buscar(chave);
+      
+        
+        /*for(int j = 0; j < ids.size(); j++){
+          System.out.println(ids.get(j));
+        }*/
+  
+        if (ids != null) {
+          for(int i = 0; i < ids.size(); i++){
+            jogos.add(read(ids.get(i)));
+          }
+        } else {
+          return null;
+        }
+    
+        return jogos;
+   }
 
   //Atualiza um registro 
   /*
