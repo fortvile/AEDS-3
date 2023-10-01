@@ -1,7 +1,12 @@
 # Desafio CRUD para a disciplina de AEDs3 
 
 ```bash
-Nome: Rafael Pereira Vilefort
 Professor: Hayala Curto
+Nome: Raul Cruz
+Nome: Rafael Pereira Vilefort
 ```
+
+# Como executar:
+
+Executar Java GUI no diretório ou Javac GUI.java e, depois, Java Gui se não estiver compilado.
 
