@@ -8,7 +8,7 @@ Nome: Rafael Pereira Vilefort
 
 # Como executar:
 
-Executar Java GUI no diretório ou Javac GUI.java e, depois, Java Gui se não estiver compilado.
+Executar Java GUI no diretório. Se não estiver compilado, execute Javac GUI.java e depois Java GUI
 
 # Link do vídeo:
 
